@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Home | Saroukh",
+  title: "Home",
   description: "Welcome to Saroukh.tn, the best car marketplace in Tunisia",
 }
 
