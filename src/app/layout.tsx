@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Head from "next/head";
-
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: {template:"%s | Saroukh",default:"Saroukh"},
+  title: { template: "%s | Saroukh", default: "Saroukh" },
   description: "cars marketplace buy & sell cars",
   icons: "favicon.ico",
 };
