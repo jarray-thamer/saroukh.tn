@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "%s | Saroukh",
+  title: {template:"%s | Saroukh",default:"Saroukh"},
   description: "cars marketplace buy & sell cars",
 };
 

@@ -13,12 +13,32 @@ export const lucia = new Lucia(adapter, {
 			// set to `true` when using HTTPS
 			secure: process.env.NODE_ENV === "production"
 		}
+	},
+	// get user information from the session
+	getUserAttributes: (attributes) => {
+		return {
+			userName: attributes.userName,
+			firstName: attributes.firstName,
+			lastName: attributes.lastName,
+			avatarUrl: attributes.avatarUrl,
+			googleId: attributes.googleId
+		}
 	}
 });
+
 
 // IMPORTANT!
 declare module "lucia" {
 	interface Register {
 		Lucia: typeof lucia;
+		DatabaseUserAttributes: DatabaseUserAttributes;
 	}
+}
+
+interface DatabaseUserAttributes {
+	userName: string;
+	firstName: string;
+	lastName: string;
+	avatarUrl: string | null;
+	googleId: string | null;
 }
