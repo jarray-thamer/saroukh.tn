@@ -19,7 +19,7 @@ model User {
   googleId     String?   @unique
   avatarUrl    String?
   bio          String?
-  Session      Session[]
+  Sessions     Session[]
 
   createdAt DateTime @default(now())
 
