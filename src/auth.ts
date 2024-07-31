@@ -72,5 +72,7 @@ export const validation = cache(
         );
       }
     } catch {}
+
+    return result;
   }
 );

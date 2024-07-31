@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import React from "react";
+import SignUpFormComponent from "./SignUpFormComponent";
 
 export const metadata: Metadata = {
   title: "SignUp",
@@ -8,9 +9,11 @@ export const metadata: Metadata = {
 
 const SignUpPage = () => {
   return (
-    <div>
-      <h1>SignUpPage</h1>
-    </div>
+    <>
+      <div className="space-y-2 w-full h-full">
+        <SignUpFormComponent />
+      </div>
+    </>
   );
 };
 
