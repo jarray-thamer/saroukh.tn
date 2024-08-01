@@ -5,7 +5,7 @@ import { SignInInput, signInSchema } from "@/lib/validation";
 
 import { isRedirectError } from "next/dist/client/components/redirect";
 import { redirect } from "next/navigation";
-import { verify } from "@node-rs/argon2";
+import bcrypt from "bcrypt";
 import { lucia } from "@/auth";
 import { cookies } from "next/headers";
 
@@ -19,17 +19,17 @@ export async function signIn(
     const User = await prisma.user.findFirst({
       where: { email: { equals: email, mode: "insensitive" } },
     });
+    console.log("🚀 ~ User:", User);
     if (!User) {
       return { error: "Email does not exist" };
     }
 
     // check if password is correct
-    const validPassword = await verify(User.passwordHash ?? "", password, {
-      memoryCost: 19456,
-      timeCost: 2,
-      outputLen: 32,
-      parallelism: 1,
-    });
+    const validPassword = await bcrypt.compare(
+      password,
+      User.passwordHash ?? ""
+    );
+
     if (!validPassword) {
       return { error: "Incorrect password" };
     }

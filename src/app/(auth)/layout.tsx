@@ -1,3 +1,4 @@
+import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import React from "react";
 
@@ -7,26 +8,27 @@ const authLayoutPage = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div className="w-full min-h-screen md:grid md:grid-cols-2 ">
-      <div className="bg-card flex flex-col w-full h-full p-5 justify-center items-center">
-        <h1 className="font-extrabold text-6xl mb-4 text-blue-500">
+    <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
+      <div className="flex flex-col w-full h-full p-5 space-y-6">
+        <h1 className="font-extrabold text-4xl md:text-6xl text-blue-500">
           Saroukh.tn
         </h1>
-        <div className="text-left">
-          <h1 className="font-semibold text-xl">Welcome back,</h1>
+        <Separator />
+        <div className="text-center">
+          <h1 className="font-semibold text-xl">Welcome 👋</h1>
           <p className="font-light text-sm">
             continue with Google or enter you details.
           </p>
         </div>
         <div className="w-full h-full mt-6">{children}</div>
       </div>
-      <div className="hidden bg-muted md:block">
+      <div className="hidden lg:block">
         <Image
           src="/login.jpg"
           alt="Image"
           width="1920"
           height="1080"
-          className="h-screen w-full object-cover"
+          className="h-full w-full object-cover"
         />
       </div>
     </div>

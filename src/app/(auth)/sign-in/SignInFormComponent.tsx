@@ -4,7 +4,6 @@ import React, { useState, useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
-import { signUpSchema } from "@/lib/validation";
 import {
   Form,
   FormControl,
@@ -16,99 +15,41 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { signUp } from "./actions";
 import Link from "next/link";
+import { signInSchema } from "@/lib/validation";
+import { signIn } from "./action";
 import { Loader2 } from "lucide-react";
 
-const SignUpFormComponent = () => {
+const SignInFormComponent = () => {
   const [showPassword, setShowPassword] = useState(false);
-
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | undefined>(undefined);
 
   const [isPending, startTransition] = useTransition();
 
-  const form = useForm<z.infer<typeof signUpSchema>>({
-    resolver: zodResolver(signUpSchema),
+  const form = useForm<z.infer<typeof signInSchema>>({
+    resolver: zodResolver(signInSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      userName: "",
       email: "",
       password: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof signUpSchema>) {
-    setError(null);
+  function onSubmit(values: z.infer<typeof signInSchema>) {
+    setError(undefined);
     startTransition(async () => {
-      const { error } = await signUp(values);
+      const { error } = await signIn(values);
       if (error) setError(error);
     });
   }
 
   return (
-    <div className="h-full flex max-w-full flex-row justify-around">
+    <div className="h-full flex flex-row justify-around">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-4 w-10/12 lg:w-2/3"
         >
           {error && <p className="text-center text-destructive">{error}</p>}
-          {/* First Last name fields */}
-          <div className="grid md:grid-cols-2 md:space-x-2">
-            <FormField
-              control={form.control}
-              name="firstName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>First name</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="text"
-                      placeholder="enter your first name"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="lastName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Last name</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="text"
-                      placeholder="enter your last name"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          {/* Username field */}
-          <FormField
-            control={form.control}
-            name="userName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Username</FormLabel>
-                <FormControl>
-                  <Input
-                    type="text"
-                    placeholder="enter your username"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
           {/* email field */}
           <FormField
             control={form.control}
@@ -158,6 +99,7 @@ const SignUpFormComponent = () => {
               </FormItem>
             )}
           />
+
           {/* button submit */}
           <div className="pt-2">
             <Button disabled={isPending} className="w-full" type="submit">
@@ -166,16 +108,16 @@ const SignUpFormComponent = () => {
               ) : (
                 ""
               )}
-              Sign Up
+              Login
             </Button>
           </div>
           <div className="font-light text-center">
-            Already have an account?{" "}
+            Are you new here?{" "}
             <Link
               className="font-semibold text-blue-500 hover:underline"
-              href={"/sign-in"}
+              href={"/sign-up"}
             >
-              log in
+              Sign up
             </Link>
           </div>
         </form>
@@ -184,4 +126,4 @@ const SignUpFormComponent = () => {
   );
 };
 
-export default SignUpFormComponent;
+export default SignInFormComponent;

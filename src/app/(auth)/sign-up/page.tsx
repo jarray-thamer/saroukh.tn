@@ -9,11 +9,9 @@ export const metadata: Metadata = {
 
 const SignUpPage = () => {
   return (
-    <>
-      <div className="space-y-2 w-full h-full">
-        <SignUpFormComponent />
-      </div>
-    </>
+    <div className="space-y-2 w-full h-full">
+      <SignUpFormComponent />
+    </div>
   );
 };
 

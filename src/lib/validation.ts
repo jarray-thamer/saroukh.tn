@@ -3,6 +3,8 @@ import { z } from "zod";
 const requiredString = z.string().trim();
 
 export const signUpSchema = z.object({
+  firstName: requiredString.min(1, "First name is Required"),
+  lastName: requiredString.min(1, "Last name is Required"),
   email: requiredString
     .min(1, "email is Required")
     .email("Invalid Email address"),

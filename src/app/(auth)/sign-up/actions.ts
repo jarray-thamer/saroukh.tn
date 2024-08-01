@@ -3,7 +3,8 @@
 import { lucia } from "@/auth";
 import prisma from "@/lib/prisma";
 import { SignUpInput, signUpSchema } from "@/lib/validation";
-import { hash } from "@node-rs/argon2";
+// import { hash } from "@node-rs/argon2";
+import bcrypt from "bcrypt";
 import { generateIdFromEntropySize } from "lucia";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
@@ -14,13 +15,8 @@ export async function signUp(
 ): Promise<{ error: string }> {
   try {
     const { userName, email, password } = signUpSchema.parse(credentials);
-    const passwordHash = await hash(password, {
-      memoryCost: 19456,
-      timeCost: 2,
-      outputLen: 32,
-      parallelism: 1,
-    });
-
+    const saltRounds = 10;
+    const passwordHash = await bcrypt.hash(password, saltRounds);
     const userId = generateIdFromEntropySize(10);
     // check if the username exist or not
     const existUserName = await prisma.user.findFirst({
@@ -60,6 +56,8 @@ export async function signUp(
         userName,
         email,
         passwordHash,
+        firstName: "",
+        lastName: "",
       },
     });
 
