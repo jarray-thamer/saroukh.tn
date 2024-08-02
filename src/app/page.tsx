@@ -1,5 +1,6 @@
 import LogOutButtonComponent from "@/components/LogOutButtonComponent";
-import UserAvatarButtonComponent from "@/components/userAvatarButtonComponent";
+import UserAvatarButtonComponent from "@/components/UserAvatarButtonComponent";
+
 import Link from "next/link";
 
 export default function Home() {

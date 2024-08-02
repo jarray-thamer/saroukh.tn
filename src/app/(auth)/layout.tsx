@@ -1,12 +1,18 @@
+import { validation } from "@/auth";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import React from "react";
 
-const authLayoutPage = ({
+const authLayoutPage = async ({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
+  const { session } = await validation();
+  if (session) {
+    return redirect("/market-place");
+  }
   return (
     <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
       <div className="flex flex-col w-full h-full p-5 space-y-6">
