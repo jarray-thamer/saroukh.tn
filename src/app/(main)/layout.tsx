@@ -11,7 +11,7 @@ const MarketPlaceLayout = async ({
   if (!session) {
     return redirect("/sign-in");
   }
-  return <div>MarketPlaceLayout</div>;
+  return <div>{children}</div>;
 };
 
 export default MarketPlaceLayout;
