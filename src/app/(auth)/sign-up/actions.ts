@@ -14,7 +14,8 @@ export async function signUp(
   credentials: SignUpInput
 ): Promise<{ error: string }> {
   try {
-    const { userName, email, password } = signUpSchema.parse(credentials);
+    const { userName, email, password, firstName, lastName } =
+      signUpSchema.parse(credentials);
     const saltRounds = 10;
     const passwordHash = await bcrypt.hash(password, saltRounds);
     const userId = generateIdFromEntropySize(10);
@@ -56,8 +57,8 @@ export async function signUp(
         userName,
         email,
         passwordHash,
-        firstName: "",
-        lastName: "",
+        firstName,
+        lastName,
       },
     });
 

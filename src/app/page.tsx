@@ -1,3 +1,5 @@
+import LogOutButtonComponent from "@/components/LogOutButtonComponent";
+import UserAvatarButtonComponent from "@/components/userAvatarButtonComponent";
 import Link from "next/link";
 
 export default function Home() {
@@ -10,6 +12,9 @@ export default function Home() {
       <Link className="block" href={"sign-in"}>
         Sign-in
       </Link>
+      <LogOutButtonComponent />
+
+      <UserAvatarButtonComponent />
     </div>
   );
 }
