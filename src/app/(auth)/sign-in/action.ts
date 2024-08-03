@@ -19,7 +19,6 @@ export async function signIn(
     const User = await prisma.user.findFirst({
       where: { email: { equals: email, mode: "insensitive" } },
     });
-    console.log("🚀 ~ User:", User);
     if (!User) {
       return { error: "Email does not exist" };
     }
@@ -42,7 +41,7 @@ export async function signIn(
       sessionCookie.attributes
     );
 
-    return redirect("/");
+    return redirect("/market-place");
   } catch (error) {
     if (isRedirectError(error)) throw error;
     console.error(error);

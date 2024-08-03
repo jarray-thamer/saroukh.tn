@@ -1,17 +1,22 @@
 import { validation } from "@/auth";
+import SessionProvider from "./SessionProvider";
 import { redirect } from "next/navigation";
-import React from "react";
+import UserAvatarButtonComponent from "@/components/UserAvatarButtonComponent";
 
-const MarketPlaceLayout = async ({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) => {
-  const { session } = await validation();
-  if (!session) {
-    return redirect("/sign-in");
+}>) {
+  const session = await validation();
+  if (!session.user) {
+    // Redirect to login page
+    redirect("/sign-in");
   }
-  return <div>{children}</div>;
-};
-
-export default MarketPlaceLayout;
+  return (
+    <SessionProvider value={session}>
+      <UserAvatarButtonComponent />
+      <div>{children}</div>
+    </SessionProvider>
+  );
+}
