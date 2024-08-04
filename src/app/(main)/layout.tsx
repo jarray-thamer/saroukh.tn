@@ -1,7 +1,7 @@
 import { validation } from "@/auth";
 import SessionProvider from "./SessionProvider";
 import { redirect } from "next/navigation";
-import UserAvatarButtonComponent from "@/components/UserAvatarButtonComponent";
+import NavBar from "./NavBar";
 
 export default async function RootLayout({
   children,
@@ -15,8 +15,8 @@ export default async function RootLayout({
   }
   return (
     <SessionProvider value={session}>
-      <UserAvatarButtonComponent />
-      <div>{children}</div>
+      <NavBar />
+      <div className="w-screen max-w-screen-2xl">{children}</div>
     </SessionProvider>
   );
 }

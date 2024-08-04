@@ -36,7 +36,7 @@ const UserAvatarButtonComponent = () => {
           <User className="rounded-md p-1 size-8 cursor-pointer hover:bg-secondary" />
         )}
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent className="me-3">
         <DropdownMenuLabel>
           <h3 className="uppercase">{user.userName}</h3>
           <p className="font-light">{user.email}</p>
