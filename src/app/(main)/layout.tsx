@@ -2,6 +2,7 @@ import { validation } from "@/auth";
 import SessionProvider from "./SessionProvider";
 import { redirect } from "next/navigation";
 import NavBar from "./NavBar";
+import MenuSideBar from "@/components/MenuSideBar";
 
 export default async function RootLayout({
   children,
@@ -9,9 +10,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await validation();
-  if (!session.user) {
-    // Redirect to login page
-    redirect("/sign-in");
+  if (!session) {
+    redirect("/login");
   }
   return (
     <SessionProvider value={session}>

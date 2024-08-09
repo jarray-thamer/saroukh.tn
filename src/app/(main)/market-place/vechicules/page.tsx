@@ -1,7 +1,11 @@
 import React from "react";
 
 const VechiculesMarketPlace = () => {
-  return <div>VechiculesMarketPlace</div>;
+  return (
+    <div>
+      <div>VechiculesMarketPlace</div>
+    </div>
+  );
 };
 
 export default VechiculesMarketPlace;

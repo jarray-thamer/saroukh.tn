@@ -10,6 +10,7 @@ export default function Home() {
       <Link className="block" href={"sign-in"}>
         Sign-in
       </Link>
+      <Link href={"/market-place"}>Market place</Link>
     </div>
   );
 }
